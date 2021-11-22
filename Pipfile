@@ -7,16 +7,14 @@ verify_ssl = true
 # linters
 flake8 = "*"
 pylint = "*"
-
 # static type checker
 mypy = "*"
-
 # format tools
 black = "21.9b0"
 isort = "*"
-
 # testing
 pytest = "*"
+parameterized = "*"
 
 [packages]
 
