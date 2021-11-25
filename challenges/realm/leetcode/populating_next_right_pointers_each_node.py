@@ -39,7 +39,7 @@ class Solution:
                 q.append(node.left)
 
             node.next = node_ahead
-            if remaining < 2:  # last node in level -> reset node_ahead
+            if remaining < 2:  # last node on the level -> reset node_ahead
                 level += 1
                 remaining = 2 ** level
                 node_ahead = None
