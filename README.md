@@ -1,9 +1,8 @@
 <h1 align="center">Pyforces</h1>
-
-<h2 align="center">Leveraging pythonic forces to defeat different coding challenges!</h2>
 <p align="center">
   <img src="docs/pyforces.png">
 </p>
+<h2 align="center">Leveraging pythonic forces to defeat different coding challenges!</h2>
 
 ## Table of Contents
 
@@ -17,7 +16,7 @@
 
 ## Powers
 
-The `powers` folder contains some powerful algorithmitic techniques that can be used to defeat many "resistent" enemies (the coding challenges). Jokes aside, this folder contains some simple code snippets with some important algorithms to remember.
+The `powers` folder contains some powerful algorithmitic techniques that can be used to defeat many "resistent" enemies (the coding challenges). Jokes aside, this folder contains some simple code snippets with important algorithms to keep in mind.
 
 ## Tests
 
