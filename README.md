@@ -5,7 +5,6 @@
 </p>
 
 <h2 align="center">Leveraging pythonic forces to defeat different coding challenges!</h2>
-<br/>
 
 ## Table of Contents
 
