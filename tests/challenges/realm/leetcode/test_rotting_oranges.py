@@ -2,7 +2,7 @@ import unittest
 
 from parameterized import parameterized
 
-from challenges.realm.leetcode.rotten_oranges import Solution
+from challenges.realm.leetcode.rotting_oranges import Solution
 
 
 class RottenOrangesTests(unittest.TestCase):
