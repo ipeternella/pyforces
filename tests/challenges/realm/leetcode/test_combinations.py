@@ -5,7 +5,7 @@ from parameterized import parameterized
 from challenges.realm.leetcode.combinations import Solution
 
 
-class JumpGameIITests(unittest.TestCase):
+class CombinationTests(unittest.TestCase):
     def setUp(self):
         self.solution = Solution()
 
