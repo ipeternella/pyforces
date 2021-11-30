@@ -2,15 +2,32 @@
 LeetCode solution for House Robber (LC#198).
 
 https://leetcode.com/problems/house-robber/
-
-Topics: Dynamic programming
 """
-
 from typing import Dict
 from typing import List
 
 
 class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        if n < 2:
+            return nums[0]
+
+        state = [0] * n
+        state[0] = nums[0]
+        state[1] = nums[1] if nums[1] > nums[0] else nums[0]
+
+        # O(N) in time
+        for i in range(1, n - 1):
+            # can be improved further: as just state i + 1, i and i - 1 are used, the
+            # space complexity can be brought down to O(1) instead of O(N) by using vars
+            state[i + 1] = max(state[i], state[i - 1] + nums[i + 1])
+
+        return state[n - 1]
+
+
+class SolutionRecursive:  # non-optimal!
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
 
