@@ -18,10 +18,10 @@ class Solution:
         state[0] = nums[0]
         state[1] = nums[1] if nums[1] > nums[0] else nums[0]
 
-        # O(N) in time
+        # can be improved further: as just state i + 1, i and i - 1 are used, the
+        # space complexity can be brought down to O(1) instead of O(N) by using vars
         for i in range(1, n - 1):
-            # can be improved further: as just state i + 1, i and i - 1 are used, the
-            # space complexity can be brought down to O(1) instead of O(N) by using vars
+            # picking state[i]: drop house i + 1, else: keep with house[i - 1] plus this one (i + 1)
             state[i + 1] = max(state[i], state[i - 1] + nums[i + 1])
 
         return state[n - 1]
