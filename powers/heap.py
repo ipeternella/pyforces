@@ -56,7 +56,7 @@ class MaxHeap(Generic[T]):
 
         if biggest_i != parent_i:
             self._swap(biggest_i, parent_i)
-            self.heapify(parent_i)
+            self.heapify(biggest_i)
 
     def pop_max(self) -> Optional[T]:
         size = len(self)
@@ -122,7 +122,7 @@ class MinHeap(Generic[T]):
 
         if smallest_i != parent_i:
             self._swap(smallest_i, parent_i)
-            self.heapify(parent_i)
+            self.heapify(smallest_i)
 
     def pop_min(self) -> Optional[T]:
         size = len(self)
