@@ -18,6 +18,13 @@ class HeapTests(unittest.TestCase):
         # assert
         self.assertEqual(heap.heap, [4, 3, 2, 1])
 
+    def test_should_build_max_heap_with_list(self):
+        # arrange
+        heap = MaxHeap([4, 1, 3, 2, 16, 9, 10, 14, 8, 7])
+
+        # assert
+        self.assertEqual(heap.heap, [16, 14, 10, 8, 7, 9, 3, 2, 4, 1])
+
     def test_should_build_min_heap(self):
         # arrange
         heap = MinHeap()
@@ -30,6 +37,13 @@ class HeapTests(unittest.TestCase):
 
         # assert
         self.assertEqual(heap.heap, [1, 2, 4, 3])
+
+    def test_should_build_min_heap_with_list(self):
+        # arrange
+        heap = MinHeap([7, 5, 3, 2])
+
+        # assert
+        self.assertEqual(heap.heap, [2, 5, 3, 7])
 
     def test_should_pop_items_from_min_heap(self):
         # arrange

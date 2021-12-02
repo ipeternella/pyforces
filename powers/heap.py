@@ -14,8 +14,14 @@ T = TypeVar("T")
 class MaxHeap(Generic[T]):
     heap: List[T]
 
-    def __init__(self):
-        self.heap = []
+    def __init__(self, nums: Optional[List[T]] = None):
+        if nums:
+            self.heap = nums
+            n = len(nums)
+            for i in range(n // 2, -1, -1):
+                self.heapify(i)
+        else:
+            self.heap = []
 
     def __len__(self) -> int:
         return len(self.heap)
@@ -42,11 +48,11 @@ class MaxHeap(Generic[T]):
         self.heap.append(key)
         self.increase_key(len(self) - 1, key)
 
-    def heapify(self, parent_i: int) -> None:
+    def heapify(self, parent_i: int, size: Optional[int] = None) -> None:
         left_i = self.left_child(parent_i)
         right_i = self.right_child(parent_i)
         biggest_i = parent_i
-        size = len(self.heap)
+        size = len(self.heap) if size is None else size  # decreasing sizes is used for heapsort
 
         if left_i < size and self.heap[parent_i] < self.heap[left_i]:  # type: ignore
             biggest_i = left_i
@@ -56,7 +62,7 @@ class MaxHeap(Generic[T]):
 
         if biggest_i != parent_i:
             self._swap(biggest_i, parent_i)
-            self.heapify(biggest_i)
+            self.heapify(biggest_i, size)
 
     def pop_max(self) -> Optional[T]:
         size = len(self)
@@ -80,8 +86,15 @@ class MaxHeap(Generic[T]):
 class MinHeap(Generic[T]):
     heap: List[T]
 
-    def __init__(self):
-        self.heap = []
+    def __init__(self, nums: Optional[List[T]] = None):
+        if nums:
+            self.heap = nums
+            n = len(nums)
+
+            for i in range(n // 2, -1, -1):
+                self.heapify(i)
+        else:
+            self.heap = []
 
     def __len__(self) -> int:
         return len(self.heap)
