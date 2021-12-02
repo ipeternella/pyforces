@@ -18,7 +18,7 @@ class MaxHeap(Generic[T]):
         if nums:
             self.heap = nums
             n = len(nums)
-            for i in range(n // 2, -1, -1):
+            for i in range(n // 2 - 1, -1, -1):
                 self.heapify(i)
         else:
             self.heap = []
@@ -91,7 +91,7 @@ class MinHeap(Generic[T]):
             self.heap = nums
             n = len(nums)
 
-            for i in range(n // 2, -1, -1):
+            for i in range(n // 2 - 1, -1, -1):
                 self.heapify(i)
         else:
             self.heap = []
