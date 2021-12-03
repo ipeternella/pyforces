@@ -1,11 +1,8 @@
 """
-Hackerrank solution for Fraudulent Activity Notifications:
+Solution for: Fraudulent Activity Notifications
 
 https://www.hackerrank.com/challenges/fraudulent-activity-notifications
-
-Topics: countsort, linear median finding
 """
-
 from typing import List
 
 
