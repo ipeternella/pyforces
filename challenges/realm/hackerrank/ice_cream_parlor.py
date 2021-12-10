@@ -1,5 +1,5 @@
 """
-Hackerrank solution for: Ice Cream Parlor
+Solution for: Ice Cream Parlor
 
 https://www.hackerrank.com/challenges/icecream-parlor/problem
 """

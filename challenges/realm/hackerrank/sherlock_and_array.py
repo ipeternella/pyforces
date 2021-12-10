@@ -1,5 +1,5 @@
 """
-Hackerrank solution for: Missing Numbers
+Solution for: Missing Numbers
 
 https://www.hackerrank.com/challenges/missing-numbers/problem
 """
