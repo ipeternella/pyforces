@@ -1,8 +1,8 @@
 """
-Module with segment (statistic trees). A segment tree contains nodes in which each node 
-holds a statistic info that aggregates info of some intervals (segments).
+Module with segment (statistic trees). A segment tree contains nodes in which each node
+holds a statistic info that aggregates info of some intervals (segments) of a list of values.
 
-Tree can be built in  in O(NlogN) and allows querying info from intervals in O(logN + K)
+Tree can be built in O(NlogN) and allows querying info from intervals in O(logN + K)
 where K is the number of intervals.
 """
 from typing import Callable
