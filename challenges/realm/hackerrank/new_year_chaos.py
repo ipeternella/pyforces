@@ -8,7 +8,7 @@ from typing import List
 
 def minimumBribes(q: List[int], n: int) -> int:
     bribes = 0
-    missing = -1  # -1 represents a missing person when someone advances two positions ahead
+    missing = -1  # if missing != -1, it represents a missing person whose place was taken by someone who moved twice
 
     for i, person in enumerate(q):
         shift = person - (i + 1)  # shifted position of the current person in the queue
