@@ -48,6 +48,22 @@ class Trie:
 
         curr.is_str = True
 
+    def contains_prefix(self, prefix: str) -> bool:
+        """
+        Checks if a given prefix is in the Trie or not. Running time is O(|prefix|).
+        """
+        curr = self.root
+
+        for i in range(len(prefix)):
+            j = ord(prefix[i]) - ord("a")
+
+            if curr.paths[j] is None:
+                return False
+
+            curr = curr.paths[j]
+
+        return True
+
     def __contains__(self, s: str) -> bool:
         """
         Checks if a given string is in the Trie or not. Running time is O(|s|).
