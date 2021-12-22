@@ -15,7 +15,7 @@ def countTriplets(arr: List[int], r: int) -> int:
     triplets = 0
 
     # interpret each num as the middle one of the triplets (a, _b_, c)
-    # requires a = b//r and c = a * r triplets
+    # requires a = b // r and c = b * r triplets
     for i in range(n - 1, -1, -1):
         b = arr[i]
         a = b // r
