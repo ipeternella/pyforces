@@ -16,9 +16,9 @@ class Solution:
         while l <= r:
             if height[l] < height[r]:
                 l += 1
-                max_area = max(max_area, (r - l) * min(height[l], height[r]))
             else:
                 r -= 1
-                max_area = max(max_area, (r - l) * min(height[l], height[r]))
+
+            max_area = max(max_area, (r - l) * min(height[l], height[r]))
 
         return max_area
