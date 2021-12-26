@@ -7,6 +7,27 @@ from typing import List
 from typing import Set
 
 
+class SolutionII:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def swap(arr, i, j):
+            arr[i], arr[j] = arr[j], arr[i]
+
+        def permute(start: int) -> None:
+            if start == n:
+                results.append(nums.copy())
+
+            for i in range(start, n):
+                swap(nums, start, i)
+                permute(start + 1)
+                swap(nums, start, i)
+
+        n = len(nums)
+        results: List[List[int]] = []
+        permute(0)
+
+        return results
+
+
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
