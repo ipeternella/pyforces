@@ -133,3 +133,6 @@ test-results.xml
 
 # Sonnar
 .scannerwork
+
+# Main (experimentation) folder
+lab
