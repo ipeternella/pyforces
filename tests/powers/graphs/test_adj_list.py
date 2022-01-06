@@ -70,6 +70,40 @@ class GraphAdjListTests(unittest.TestCase):
         self.assertCountEqual(adj_vertices, expected_adj_vertices)
 
     @mock.patch("builtins.print")
+    def test_should_bfs_graph_for_shortest_path(self, mock_print: mock.MagicMock):
+        r"""
+        Graph:
+
+               2 - 3 - - 5
+             /     |   /  \
+            1      |  /    6
+             \     | /
+               0 - 4
+
+        One possible shortest path: [1, 0, 4, 5, 6], dist = 4
+        """
+        # arrange
+        g = Graph(7)
+        g.add_edge(0, 1)
+        g.add_edge(1, 2)
+        g.add_edge(3, 5)
+        g.add_edge(5, 6)
+        g.add_edge(4, 5)
+        g.add_edge(0, 4)
+        g.add_edge(3, 4)
+        g.add_edge(3, 2)
+
+        # act
+        dist, shortest_path = g.bfs(source=1, dest=6)
+
+        # assert
+        expected_shortest_path = [1, 0, 4, 5, 6]
+        expected_dist = 4
+
+        self.assertEqual(shortest_path, expected_shortest_path)
+        self.assertEqual(dist, expected_dist)
+
+    @mock.patch("builtins.print")
     def test_should_bfs_graph(self, mock_print: mock.MagicMock):
         # arrange
         g = Graph(7)
