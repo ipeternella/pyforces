@@ -16,6 +16,24 @@ class TreeNode:
         self.right = right
 
 
+class SolutionII:
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        def dfs(node1, node2):
+            value1 = node1.val if node1 is not None else None
+            value2 = node2.val if node2 is not None else None
+
+            if node1 is None and node2 is None:
+                return True
+
+            if value1 != value2:
+                return False
+
+            # two pointers traversal at opposite directions
+            return dfs(node1.left, node2.right) and dfs(node1.right, node2.left)
+
+        return dfs(root.left, root.right)  # type: ignore
+
+
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         q: Queue[Tuple[Optional[TreeNode], int]] = Queue()
