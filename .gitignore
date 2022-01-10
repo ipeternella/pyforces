@@ -136,3 +136,7 @@ test-results.xml
 
 # Main (experimentation) folder
 lab
+
+# Input/output files
+in.txt
+out.txt
