@@ -22,7 +22,7 @@ class Solution:
             j = i + 1
             k = n - 1
 
-            # pointers which move according to what's needed to
+            # two pointers which move according to what's needed to
             # reach the new_target as closest as possible
             while j < k:
                 b = nums[j]
