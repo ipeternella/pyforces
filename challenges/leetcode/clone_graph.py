@@ -3,7 +3,8 @@ Solution for LC#133: Clone Graph
 
 https://leetcode.com/problems/clone-graph/
 """
-from typing import Dict
+from typing import List
+from typing import Optional
 
 
 class Node:
@@ -29,8 +30,9 @@ class Solution:
         if node is None:
             return None
 
-        visited = [False] * 101  # key space: 1 <= node.val <= 100 (101 indexes)
-        nodes: Dict[int, "Node"] = dict()
-        dfs(node)
+        # key space: 1 <= node.val <= 100 (101 indexes)
+        nodes: List[Optional["Node"]] = [None] * 101
+        visited = [False] * 101
 
+        dfs(node)
         return nodes[node.val]
