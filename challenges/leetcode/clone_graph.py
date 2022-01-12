@@ -16,10 +16,8 @@ class Solution:
     def cloneGraph(self, node: "Node") -> "Node":
         def dfs(v):
             visited[v.val] = True
-
-            if v.val not in nodes:
-                new_v = Node(v.val)
-                nodes[v.val] = new_v
+            new_v = Node(v.val)
+            nodes[v.val] = new_v
 
             for adj_v in v.neighbors:
                 if not visited[adj_v.val]:
@@ -31,7 +29,7 @@ class Solution:
         if node is None:
             return None
 
-        visited = [False] * 101  # 101 nodes
+        visited = [False] * 101  # key space: 1 <= node.val <= 100 (101 indexes)
         nodes: Dict[int, "Node"] = dict()
         dfs(node)
 
