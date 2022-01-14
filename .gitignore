@@ -140,3 +140,6 @@ lab
 # Input/output files
 in.txt
 out.txt
+
+# Pypy
+pypy
