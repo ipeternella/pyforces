@@ -1,5 +1,11 @@
 """
 Module with binary search implementations.
+
+[!]: Keep in mind that binary search can be applied to ANY monotonic increasing or
+     decreasing SEARCH SPACES. As a consequence, many problems may require binary
+     searching variables or quantities and not key values in an array. In such cases,
+     it may not be so trivial to see that binary searching is required to efficiently
+     solve the problem.
 """
 from typing import List
 
