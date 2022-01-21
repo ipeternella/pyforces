@@ -8,6 +8,49 @@ from typing import List
 
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def binary_search_low(l, r):
+            ix = -1
+
+            while l <= r:
+                mid = (l + r) // 2
+
+                if nums[mid] > target:
+                    r = mid - 1
+                elif nums[mid] < target:
+                    l = mid + 1
+                else:
+                    # keep looking left (mid always decreases if target is found again)
+                    ix = mid
+                    r = mid - 1
+
+            return ix
+
+        def binary_search_high(l, r):
+            ix = -1
+
+            while l <= r:
+                mid = (l + r) // 2
+
+                if nums[mid] > target:
+                    r = mid - 1
+                elif nums[mid] < target:
+                    l = mid + 1
+                else:
+                    # keep looking right (mid always increases if target is found again)
+                    ix = mid
+                    l = mid + 1
+
+            return ix
+
+        n = len(nums)
+        lower_bound = binary_search_low(0, n - 1)
+        upper_bound = binary_search_high(0, n - 1)
+
+        return [lower_bound, upper_bound]
+
+
+class SolutionRecursive:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
         n = len(nums)
         s = -1
         e = -1
