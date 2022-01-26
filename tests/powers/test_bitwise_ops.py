@@ -5,8 +5,11 @@ from parameterized import parameterized
 from powers.bitwise_ops import clear_ith_bit
 from powers.bitwise_ops import clear_last_bits
 from powers.bitwise_ops import clear_range_bits
+from powers.bitwise_ops import count_set_bits
 from powers.bitwise_ops import get_ith_bit
+from powers.bitwise_ops import int_to_binary
 from powers.bitwise_ops import is_odd
+from powers.bitwise_ops import is_power_of_two
 from powers.bitwise_ops import set_ith_bit
 from powers.bitwise_ops import update_bit_range
 from powers.bitwise_ops import update_ith_bit
@@ -129,3 +132,52 @@ class BitwiseOpsTests(unittest.TestCase):
 
         # assert
         self.assertEqual(updated_num, expected_num)
+
+    @parameterized.expand(
+        [
+            (9, 2),  # 1001
+            (7, 3),  # 0111
+            (2, 1),  # 0010
+            (0, 0),  # 0000
+        ]
+    )
+    def test_should_count_set_bits(self, n, expected_set_bits):
+        # act
+        set_bits = count_set_bits(n)
+
+        # assert
+        self.assertEqual(set_bits, expected_set_bits)
+
+    @parameterized.expand(
+        [
+            (9, False),
+            (7, False),
+            (0, False),
+            (1, True),
+            (2, True),
+            (16, True),
+            (128, True),
+            (1024, True),
+        ]
+    )
+    def test_should_find_powers_of_two(self, n, expected_is_power_of_two):
+        # act
+        is_power = is_power_of_two(n)
+
+        # assert
+        self.assertEqual(is_power, expected_is_power_of_two)
+
+    @parameterized.expand(
+        [
+            (9, 1001),
+            (7, 111),
+            (5, 101),
+            (15, 1111),
+        ]
+    )
+    def test_should_convert_decimal_to_binary(self, n, expected_binary):
+        # act
+        binary = int_to_binary(n)
+
+        # assert
+        self.assertEqual(binary, expected_binary)

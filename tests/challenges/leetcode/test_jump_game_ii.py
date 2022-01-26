@@ -2,12 +2,12 @@ import unittest
 
 from parameterized import parameterized
 
-from challenges.leetcode.jump_game_ii import SolutionDP
+from challenges.leetcode.jump_game_ii import Solution
 
 
 class JumpGameIITests(unittest.TestCase):
     def setUp(self):
-        self.solution = SolutionDP()
+        self.solution = Solution()
 
     @parameterized.expand(
         [

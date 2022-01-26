@@ -44,3 +44,36 @@ def get_ith_bit(n: int, i: int) -> int:
 
 def is_odd(n: int) -> bool:
     return n & 1 == 1
+
+
+def is_power_of_two(n: int) -> bool:
+    if n == 0:
+        return False
+
+    # 8 (1000) & 7 (0111) == 0000 (0)
+    return n & (n - 1) == 0
+
+
+def count_set_bits(n: int) -> int:
+    # counts bits that are 1
+    # O(log(N)) -> ex: n = 16 (2^4) has log16 ~ 4 bits to check
+    # number N has ~ 2^N
+    counter = 0
+    while n:
+        counter += n & 1
+        n >>= 1
+
+    return counter
+
+
+def int_to_binary(n: int) -> int:
+    # returns an integer compose only for the digits 1 and 0 (but as an int)
+    # 9 (1001) --> 1 + 10^3 = 1001 (decimal which represents an int)
+    binary = 0
+    pow10 = 1
+    while n:
+        binary += (n & 1) * pow10
+        pow10 *= 10
+        n >>= 1
+
+    return binary
