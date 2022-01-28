@@ -3,40 +3,29 @@ Solution for LC#134: Gas Station
 
 https://leetcode.com/problems/gas-station/
 """
-from collections import deque as Queue
 from typing import List
 
 
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         n = len(gas)
-        q: Queue[int] = Queue()
-        for i in range(n):
-            if gas[i] >= cost[i]:
-                q.append(i)
-
-        min_start = -1
-        while q:
-            start = q.popleft()
+        start, i = 0, 0
+        while start < n:
             tank = 0
-            i = start
             has_circle = False
+            i = start
 
-            if start < min_start:
-                continue
-
-            # circular moving algorithm
             while True:
                 if i == start and has_circle:
                     return start
 
-                tank += gas[i]
-                tank -= cost[i]
+                tank += gas[i] - cost[i]
 
                 # can't proceed further
                 if tank < 0:
-                    min_start = i + 1
-                    break  # impossible
+                    i += 1
+                    start = i if i > start else start + 1
+                    break
 
                 # proceed further with circular movement
                 i += 1
