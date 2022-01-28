@@ -16,30 +16,31 @@ class Solution:
 
             return digits
 
-        def create_seq_nums(total_digits):
-            # for a total_digits like 3 it builds: 100 + 20 + 3, 200 + 30 + 4, ...
-            for digit in range(1, 10):
-                base = 10 ** (total_digits - 1)
-                num = 0
-                amount_digits = 0
+        def seq_num(digit, total_digits):
+            base = 10 ** (total_digits - 1)
+            count = 0
+            num = 0
 
-                while amount_digits != total_digits:
-                    if digit > 9:
-                        return
+            while count != total_digits:
+                if digit > 9:
+                    return num, True
 
-                    num += base * digit
-                    base //= 10
-                    digit += 1
-                    amount_digits += 1
+                num += base * digit
+                base //= 10
+                digit += 1
+                count += 1
+
+            return num, False
+
+        nums: List[int] = []
+        for total_digits in range(count_digits(low), count_digits(high) + 1):
+            for first_digit in range(1, 10):
+                num, excess = seq_num(first_digit, total_digits)
+
+                if excess:
+                    continue
 
                 if low <= num <= high:
                     nums.append(num)
-
-        low_digits = count_digits(low)
-        high_digits = count_digits(high)
-        nums: List[int] = []
-
-        for digits in range(low_digits, high_digits + 1):
-            create_seq_nums(digits)
 
         return nums
