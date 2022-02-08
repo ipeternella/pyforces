@@ -42,21 +42,22 @@ def main():
     for i in range(r):
         grid[i] = [ch for ch in input().rstrip()]
 
-    if t <= 1:
+    if t <= 2:
+        is_full = t == 2
+        print_grid(grid, r, c, is_full)
+
+        return
+
+    t = (t - 3) % 4  # from here on: the grid always repeats forever
+
+    if t == 0:
+        fill_and_explode(grid, r, c)
         print_grid(grid, r, c)
-    elif t == 2:
+    elif t == 1 or t == 3:
         print_grid(grid, r, c, is_full=True)
     else:
-        t = (t - 3) % 4  # from here on: the grid always repeats forever
-
-        if t == 0:
-            fill_and_explode(grid, r, c)
-            print_grid(grid, r, c)
-        elif t == 1 or t == 3:
-            print_grid(grid, r, c, is_full=True)
-        else:
-            fill_and_explode(grid, r, c, times=2)
-            print_grid(grid, r, c)
+        fill_and_explode(grid, r, c, times=2)
+        print_grid(grid, r, c)
 
 
 if __name__ == "__main__":
