@@ -3,9 +3,9 @@ Solution for LC#23: Merge k Sorted Lists
 
 https://leetcode.com/problems/merge-k-sorted-lists/
 """
-import heapq
 import itertools
 import sys
+from queue import PriorityQueue
 from typing import List
 from typing import Optional
 
@@ -21,46 +21,42 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        nodes = lists
+        nodes = [root for root in lists if root is not None]
         new_nodes = []
         root = None
         is_root = True
-        min_heap = []
+        q = PriorityQueue()
         prev = None
 
         while nodes:
             next_min_val = INF
-
             for node in nodes:
-                if node is not None:
-                    if node.next is not None:
-                        next_min_val = min(next_min_val, node.next.val)
-                    heapq.heappush(min_heap, (node.val, next(counter), node))
+                q.put((node.val, next(counter), node))  # counter: tiebreaker for nodes with same value (same priority)
+                if node.next is not None:
+                    next_min_val = min(next_min_val, node.next.val)
 
-            # empty min. heap: no nodes were added so all linked lists were traversed
-            if not min_heap:
+            # empty queue: no linked list nodes were added so all linked lists were traversed
+            if q.empty():
                 return root
 
             # prepare new root
             if is_root:
-                _, _, prev = heapq.heappop(min_heap)
-                root = prev
+                _, _, root = q.get()
                 is_root = False
-                new_nodes.append(prev.next)  # advance list
+                prev = root
+                new_nodes.append(prev.next)
 
-            while min_heap:
-                val, _, curr = heapq.heappop(min_heap)
+            while not q.empty():
+                _, _, curr = q.get()
 
-                # only values that are smaller than the next min value are added in this iteration
-                # and such list pointers are advanced! lists with bigger values are not advanced!
-                if val > next_min_val:
-                    new_nodes.append(curr)  # keep list as is
+                if curr.val > next_min_val:
+                    new_nodes.append(curr)
                 else:
-                    new_nodes.append(curr.next)  # advance list
+                    new_nodes.append(curr.next)
                     prev.next = curr  # type: ignore
                     prev = curr
 
-            nodes = new_nodes
+            nodes = [node for node in new_nodes if node is not None]
             new_nodes = []
 
         return root
