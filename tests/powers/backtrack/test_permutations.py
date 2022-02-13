@@ -2,7 +2,7 @@ import unittest
 
 from parameterized import parameterized
 
-from powers.backtrack.permutations import find_permutations
+from powers.backtrack.subsets_permutations_combinations import permutations
 
 
 class BacktrackPermutationsTests(unittest.TestCase):
@@ -13,7 +13,7 @@ class BacktrackPermutationsTests(unittest.TestCase):
     )
     def test_should_compute_largest_subarray_sum(self, s, expected_permutations):
         # act
-        permutations = find_permutations(s)
+        computed_permutations = permutations(s)
 
         # assert
-        self.assertCountEqual(permutations, expected_permutations)
+        self.assertCountEqual(computed_permutations, expected_permutations)
