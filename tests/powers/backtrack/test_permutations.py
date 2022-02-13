@@ -11,7 +11,7 @@ class BacktrackPermutationsTests(unittest.TestCase):
             ("abc", ["abc", "acb", "bac", "bca", "cab", "cba"]),
         ]
     )
-    def test_should_compute_largest_subarray_sum(self, s, expected_permutations):
+    def test_should_compute_permutations_of_string(self, s, expected_permutations):
         # act
         computed_permutations = permutations(s)
 

@@ -5,8 +5,7 @@ Module with code to handle problems with huge/exponential solution spaces such a
 - Permutations
 - Combinations
 
-The solutions covered here make use of backtracking algorithms to search the whole
-solution space.
+The solutions covered here make use of backtracking algorithms to search the whole solution space.
 """
 from typing import List
 
