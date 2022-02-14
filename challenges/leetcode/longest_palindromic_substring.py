@@ -12,8 +12,7 @@ class Solution:
         n = len(s)
 
         # concentric palindromes approach: a bigger palindrome can be detected in O(1) if
-        # the first and last chars are the same so we can get an overall algorithm with O(N^2)
-        # time complexity and O(1) space complexity
+        # the first and last chars are the same so we get an algorithm that runs in O(N^2) time
         for center in range(n):
             i, j = center, center
 
