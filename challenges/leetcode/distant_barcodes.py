@@ -1,5 +1,5 @@
 """
-Solution for LC#1054: Distant Barcodes 
+Solution for LC#1054: Distant Barcodes
 
 https://leetcode.com/problems/distant-barcodes/
 """
@@ -37,7 +37,7 @@ class Solution:
 
         # deal with final element of the queue if available
         if not q.empty():
-            f, val = q.get()
+            _, val = q.get()
             shuffled.append(val)
 
         return shuffled
