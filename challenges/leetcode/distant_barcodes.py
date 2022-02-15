@@ -20,7 +20,7 @@ class Solution:
             f1, val1 = q.get()
             f2, val2 = q.get()
 
-            # convertion of min heap to max heap
+            # conversion from min heap to max heap
             f1 = -f1 - 1
             f2 = -f2 - 1
 
@@ -28,7 +28,7 @@ class Solution:
             shuffled.append(val1)
             shuffled.append(val2)
 
-            # added values with one less frequencyg
+            # added values with one less frequency
             if f1 > 0:
                 q.put((-f1, val1))
 
