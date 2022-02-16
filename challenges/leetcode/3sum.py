@@ -3,39 +3,32 @@ Solution for LC#15: 3Sum
 
 https://leetcode.com/problems/3sum/
 """
-from typing import Dict
 from typing import List
-from typing import Set
-from typing import Tuple
 
 
 class Solution:
-    def threeSum(self, nums: List[int]) -> Set[Tuple[int, ...]]:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
         triplets = set()
-        checked = set()
-        freqs: Dict[int, int] = dict()
-
-        for j in range(n):
-            freqs[nums[j]] = freqs.get(nums[j], 0) + 1
+        prev_target_2sum = set()
 
         for i in range(n):
-            if nums[i] in checked:
-                continue
+            target_2sum = -nums[i]
+            complements = dict()
 
-            target = -nums[i]
-            freqs[nums[i]] -= 1
-            for j in range(i + 1, n):
-                b = nums[j]
-                freqs[b] -= 1
-                needed = target - b
+            # avoid working on previous 2sum targets
+            if target_2sum not in prev_target_2sum:
+                for j in range(i + 1, n):
+                    complements[target_2sum - nums[j]] = j
 
-                if freqs.get(needed, 0) > 0:
-                    triplets.add(tuple(sorted([b, needed, nums[i]])))
+                for j in range(i + 1, n):
+                    if nums[j] in complements:
+                        k = complements[nums[j]]
 
-                freqs[b] += 1
+                        if k != j:  # number cannot complement itself (that's why we store indexes in complements)
+                            triplet = sorted([nums[i], nums[j], nums[k]])
+                            triplets.add(tuple(triplet))
 
-            freqs[nums[i]] += 1
-            checked.add(nums[i])
+                prev_target_2sum.add(target_2sum)
 
-        return triplets
+        return triplets  # type: ignore
