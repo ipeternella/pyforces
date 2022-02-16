@@ -6,7 +6,30 @@ https://leetcode.com/problems/coin-change-2/
 from typing import List
 
 
+# DP tabulated approach: O(amount * len(coins))
 class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        n = len(coins)
+        dp = [[0] * n for _ in range(amount + 1)]  # dp[amount][max_coin_index] = ways
+
+        for i in range(n):
+            dp[0][i] = 1
+
+        for target in range(1, amount + 1):
+            max_so_far = 0
+            for i in range(n):
+                c = coins[i]
+
+                if target - c >= 0:
+                    dp[target][i] = dp[target - c][i] + max_so_far
+                    max_so_far = max(max_so_far, dp[target][i])
+                else:
+                    dp[target][i] = max_so_far  # if coin value is too much: max_so_far takes place
+
+        return dp[amount][n - 1]
+
+
+class SolutionMemoized:
     def change(self, amount: int, coins: List[int]) -> int:
         def change(amount, start, dp):
             if amount < 0:
