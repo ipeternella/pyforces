@@ -7,6 +7,27 @@ https://leetcode.com/problems/edit-distance/
 
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
+        m = len(word1)
+        n = len(word2)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]  # dp[m][n] = edit_dist
+
+        for i in range(m + 1):
+            for j in range(n + 1):
+                if i == 0 or j == 0:
+                    # if one of the sizes are 0 then all the amount of remaining chars is the edit dist
+                    dp[i][j] = j if i == 0 else i
+                elif word1[i - 1] == word2[j - 1]:
+                    # same char, just go on
+                    dp[i][j] = dp[i - 1][j - 1]
+                else:
+                    # chars are diff: take minimum edit of add, remove or replace plus the current op
+                    dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1
+
+        return dp[m][n]
+
+
+class SolutionMemoized:
+    def minDistance(self, word1: str, word2: str) -> int:
         def levenshtein(m, n, dp):
             # if the other string is empty: return the cost of adding remaining chars: return m or n
             if m == 0 or n == 0:
