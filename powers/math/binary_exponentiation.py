@@ -3,24 +3,32 @@ Module with an efficient approach to compute exponentiations.
 """
 
 
-# [!]: runs in O(log(b)): so for 10^18 it runs ~ 64 ops and not 10^18 ops [!]
 def power(a: int, b: int) -> int:
-    """
-    Given a base a = 3 and exponent b = 5 we want to compute: 3 ^ 5.
-    Start by decomposing such exponentiation into powers of 2: _1_, 2, _4_, 8, 16, so:
-        - 3^5 = 3^4 * 3^1
+    # [!]: runs in O(log(b)): so for 10^18 it runs ~ 64 ops and not 10^18 ops [!]
 
-    As such, we can use the set bits of the exponent b = 5 (101) to compute a ^ b in log(b):
-    - For every set bit of b: ans *= a
-    - Always increase a *= a
-    - For next set bit of b: ans *= a will give the decomposed exponentation: ans = 3^1 * 3^4
-    """
-    ans = 1
+    # decompose the exponent b into bases of 2, e.g., 5 == 4 + 1 (2^2 + 2^0)
+    # such decomposition matches the set bits of b: 5 == b101
+    # so for every set bit of b we multiply the rslt by a which will have powers of 2
+    rslt = 1
     while b:
-        if b & 1:  # for every set bit, multiply b by the powered a
-            ans *= a
+        if b & 1:
+            rslt *= a  # a == 3^1 then 3^4 when computing 3^5 (a == 3, b == 5)
 
         a *= a
         b >>= 1
 
-    return ans
+    return rslt
+
+
+def mod_power(a: int, b: int, mod: int = 1000000007) -> int:
+    rslt = 1
+    while b:
+        if b & 1:
+            rslt *= a
+            rslt %= mod  # (rslt * a) % mod == rslt * a if (rslt * a) < mod
+
+        a *= a
+        a %= mod
+        b >>= 1
+
+    return rslt
