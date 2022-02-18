@@ -10,7 +10,6 @@ from powers.bitwise_ops import get_ith_bit
 from powers.bitwise_ops import int_to_binary
 from powers.bitwise_ops import is_odd
 from powers.bitwise_ops import is_power_of_two
-from powers.bitwise_ops import power
 from powers.bitwise_ops import set_ith_bit
 from powers.bitwise_ops import update_bit_range
 from powers.bitwise_ops import update_ith_bit
@@ -182,11 +181,3 @@ class BitwiseOpsTests(unittest.TestCase):
 
         # assert
         self.assertEqual(binary, expected_binary)
-
-    @parameterized.expand([(2, 10, 1024), (3, 5, 243), (5, 5, 3125)])
-    def test_should_assert_a_pow_b(self, a, b, expected_a_pow_b):
-        # act
-        a_pow_b = power(a, b)
-
-        # assert
-        self.assertEqual(a_pow_b, expected_a_pow_b)
