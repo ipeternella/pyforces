@@ -2,8 +2,8 @@ import unittest
 
 from parameterized import parameterized
 
-from powers.math.binary_exponentiation import mod_power
-from powers.math.binary_exponentiation import power
+from powers.mathematics.binary_exponentiation import mod_power
+from powers.mathematics.binary_exponentiation import power
 
 
 class MathBinaryExponentiationTests(unittest.TestCase):
