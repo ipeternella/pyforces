@@ -2,11 +2,12 @@ import unittest
 
 from parameterized import parameterized
 
-from powers.mathematics.binary_exponentiation import mod_power
-from powers.mathematics.binary_exponentiation import power
+from powers.mathematics.binary_ops import mod_power
+from powers.mathematics.binary_ops import multiply
+from powers.mathematics.binary_ops import power
 
 
-class MathBinaryExponentiationTests(unittest.TestCase):
+class MathBinaryOperationsTests(unittest.TestCase):
     @parameterized.expand(
         [
             (2, 5, 32),
@@ -32,3 +33,11 @@ class MathBinaryExponentiationTests(unittest.TestCase):
 
         # assert
         self.assertEqual(rslt, expected_power)
+
+    @parameterized.expand([(2, 5, 10), (3, 5, 15)])
+    def test_should_multiply_a_b(self, a, b, expected_rslt):
+        # act
+        rslt = multiply(a, b)
+
+        # assert
+        self.assertEqual(rslt, expected_rslt)
