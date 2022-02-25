@@ -10,15 +10,22 @@ class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         n = len(nums)
         complements = dict()
+        pair_2sum = []
 
+        # store two sum complement of each number: trade memory to reduce O(N^2) runtime
         for i in range(n):
-            complements[target - nums[i]] = i  # store the index as the nums are NOT unique
+            complements[target - nums[i]] = i
 
+        # O(N) in time, O(N) in space
         for i in range(n):
-            if nums[i] in complements and complements[nums[i]] != i:  # can't reuse same num
-                return [i, complements[nums[i]]]
+            if nums[i] in complements:
+                j = complements[nums[i]]
 
-        return [-1, -1]
+                if j > i:  # complement must always be ahead to avoid duplicates
+                    pair_2sum = [i, j]
+                    break
+
+        return pair_2sum
 
 
 class SolutionTwoPointers:
