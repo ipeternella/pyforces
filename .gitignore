@@ -143,3 +143,6 @@ out.txt
 
 # Pypy
 pypy
+
+# C++ files
+main.out*
