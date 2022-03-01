@@ -10,8 +10,7 @@ class Solution {
 public:
     vector<int> countBits(int n) {
         vector<int> dp(n + 1, 0);
-        long long int pow2 = 1;
-        long long int last_pow2 = 1;
+        int pow2 = 1, last_pow2 = 1;
 
         for (int i = 1; i <= n; i++) {
             if (i == pow2) {
