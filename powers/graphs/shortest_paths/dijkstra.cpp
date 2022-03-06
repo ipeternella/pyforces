@@ -1,3 +1,7 @@
+/*
+ * Dijkstra's algorithm for single source shortest paths (SSSP). Useful for weighted and directed graphs
+ * which do NOT have negative weights. For unweighted graphs, BFS is probably a simpler alternative.
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
