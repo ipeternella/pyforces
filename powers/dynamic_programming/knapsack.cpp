@@ -18,16 +18,10 @@ int knapsack_01(vector<int> weights, vector<int> values, int W) {
     vector<vector<int>> dp(n, vector<int>(W + 1));
 
     // init dp state
-    for (int i = 0; i < n; i++) {
-        for (int w = 0; w <= W; w++) {
-            if (weights[i] <= w) {
+    for (int i = 0; i < n; i++)
+        for (int w = 0; w <= W; w++)
+            if (weights[i] <= w)
                 dp[i][w] = values[i];
-            } else {
-                // pick biggest value of knapsack with one less value
-                dp[i][w] = i - 1 >= 0 ? dp[i - 1][w] : 0;
-            }
-        }
-    }
 
     for (int i = 1; i < n; i++) {
         for (int w = 0; w <= W; w++) {
@@ -46,6 +40,29 @@ int knapsack_01(vector<int> weights, vector<int> values, int W) {
     }
 
     return dp[n - 1][W];
+}
+
+/*
+ * Knapsack 01: with top-down approach. Notice two variables are also used for the DP state as we must keep
+ * track of which item we are currently trying to pick (not an unbound knapsack problem).
+ */
+int memo_knapsack_01(vector<int>& weights, vector<int>& values, vector<vector<int>>& dp, int W, int i) {
+    if (i < 0)
+        return 0;
+
+    if (dp[i][W] != -1)
+        return dp[i][W];
+
+    if (weights[i] <= W) {
+        dp[i][W] =
+            max(memo_knapsack_01(weights, values, dp, W - weights[i], i - 1) + values[i],
+                memo_knapsack_01(weights, values, dp, W, i - 1));
+
+        return dp[i][W];
+    }
+
+    dp[i][W] = memo_knapsack_01(weights, values, dp, W, i - 1);
+    return dp[i][W];
 }
 
 /*
@@ -112,6 +129,31 @@ int knapsack_unbound(vector<int> weights, vector<int> values, int W) {
     return dp[W];
 }
 
+/*
+ * Knapsack Unbound: top-down approach. Notice the dp state with a single variable as all the
+ * items can be taken repeatedly so each stack frame must create n subproblems picking each
+ * item and getting the max return of each of these subproblems.
+ */
+int memo_knapsack_unbound(vector<int> weights, vector<int> values, vector<int>& dp, int W) {
+    int n = weights.size();
+    int v = 0;
+
+    if (W == 0)
+        return 0;
+
+    if (dp[W] != -1) {
+        return dp[W];
+    }
+
+    // check all items every time as it's an unbound knapsack problem
+    for (int i = 0; i < n; i++)
+        if (weights[i] <= W)
+            v = max(v, memo_knapsack_unbound(weights, values, dp, W - weights[i]) + values[i]);
+
+    dp[W] = v;
+    return dp[W];
+}
+
 int main() {
 #ifdef LOCAL_ONLY
     freopen("in.txt", "r", stdin);
@@ -139,11 +181,20 @@ int main() {
     cout << "Knapsack 01 (DP 2 variables)" << endl;
     cout << knapsack_01(weights, values, W) << endl;
 
+    cout << "Knapsack 01 (top-down)" << endl;
+    n = weights.size();
+    vector<vector<int>> dp(n, vector<int>(W + 1, -1));
+    cout << memo_knapsack_01(weights, values, dp, W, n - 1) << endl;
+
     cout << "Knapsack Fractional (Greedy)" << endl;
     cout << knapsack_fractional(weights, values, W) << endl;
 
     cout << "Knapsack Unbound (DP 1 variable)" << endl;
-    cout << knapsack_unbound(weights, values, W);
+    cout << knapsack_unbound(weights, values, W) << endl;
+
+    cout << "Knapsack Unbound (top-down)" << endl;
+    vector<int> dp2(W + 1, -1);
+    cout << memo_knapsack_unbound(weights, values, dp2, W) << endl;
 
     return 0;
 }
