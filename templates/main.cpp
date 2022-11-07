@@ -7,5 +7,8 @@ int main() {
     freopen("out.txt", "w", stdout);
 #endif
 
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
     return 0;
 }
